@@ -1,2 +1,8 @@
-rootProject.name = 'audio-streaming-java-consumer'
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
 
+rootProject.name = 'audio-streaming-java-consumer'
