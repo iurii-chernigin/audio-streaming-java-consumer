@@ -1,2 +1,4 @@
-package audio.streaming;public class ListenEventsConsumer {
+package audio.streaming;
+
+public class ListenEventsConsumer {
 }

@@ -1,2 +1,4 @@
-package audio.streaming;public class KafkaConfig {
+package audio.streaming;
+
+public class KafkaConfig {
 }

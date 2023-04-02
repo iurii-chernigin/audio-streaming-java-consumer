@@ -1,2 +1,4 @@
-package audio.streaming;public class PageViewEventsConsumer {
+package audio.streaming;
+
+public class PageViewEventsConsumer {
 }
