@@ -1,8 +1,16 @@
 .gradle
-build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+
+# Ignore Gradle build output directory
+build/classes
+build/distributions
+build/generated
+build/libs
+build/resources
+build/scripts
+build/tmp
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
