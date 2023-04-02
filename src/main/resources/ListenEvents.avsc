@@ -1,7 +1,7 @@
 {
   "namespace": "io.confluent.eventsim.avro",
   "type": "record",
-  "name": "PageView",
+  "name": "Listen",
   "fields": [
     {
       "name": "ts",
@@ -19,20 +19,8 @@
       "type": "long"
     },
     {
-      "name": "page",
-      "type": "string"
-    },
-    {
       "name": "auth",
       "type": "string"
-    },
-    {
-      "name": "method",
-      "type": "string"
-    },
-    {
-      "name": "status",
-      "type": "int"
     },
     {
       "name": "level",
@@ -72,10 +60,24 @@
     },
     {
       "name": "songProperties",
-      "type": [
-        "null", "song"
-      ],
-      "default": null
+      "type": {
+        "type": "record",
+        "name": "song",
+        "fields": [
+          {
+            "name": "artist",
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "duration",
+            "type": "double"
+          }
+        ]
+      }
     },
     {
       "name": "tag",

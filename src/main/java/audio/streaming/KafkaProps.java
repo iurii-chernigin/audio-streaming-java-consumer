@@ -1,7 +1,8 @@
 package audio.streaming;
 
-import io.confluent.kafka.serializers.KafkaAvroDeserializer;
-import io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig;
+import audio.streaming.schema.ListenEvent;
+import io.confluent.kafka.serializers.KafkaJsonDeserializerConfig;
+import io.confluent.kafka.serializers.KafkaJsonDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 
@@ -23,11 +24,10 @@ public class KafkaProps {
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, offsetResetConfig);
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, autoCommitConfig);
 
-        // Avro Deserialization Propeties
+        // Deserialization Propeties
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaAvroDeserializer.class.getName());
-        props.put(AbstractKafkaSchemaSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, schemaRegistryEndpoint);
-        props.put("specific.avro.reader", "true");
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaJsonDeserializer.class.getName());
+        props.put(KafkaJsonDeserializerConfig.JSON_VALUE_TYPE, ListenEvent.class.getName());
 
         return props;
     }
