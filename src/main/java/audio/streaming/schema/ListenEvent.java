@@ -2,6 +2,9 @@ package audio.streaming.schema;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ListenEvent {
 
     @JsonProperty
@@ -87,6 +90,32 @@ public class ListenEvent {
         this.gender = gender;
         this.registration = registration; // Unix time in milliseconds
         this.tag = tag; // Custom tag (enters in cli)
+    }
+
+    public Map<String, Object> getRecordMap() {
+
+        Map<String, Object> record = new HashMap<>();
+
+        record.put("artist", this.artist);
+        record.put("song", this.song);
+        record.put("duration", this.duration);
+        record.put("ts", this.ts);
+        record.put("sessionId", this.sessionId);
+        record.put("auth", this.auth);
+        record.put("itemInSession", this.itemInSession);
+        record.put("city", this.city);
+        record.put("zip", this.zip);
+        record.put("state", this.state);
+        record.put("userAgent", this.userAgent);
+        record.put("lon", this.lon);
+        record.put("userId", this.userId);
+        record.put("lastName", this.lastName);
+        record.put("firstName", this.firstName);
+        record.put("gender", this.gender);
+        record.put("registration", this.registration);
+        record.put("tag", this.tag);
+
+        return record;
     }
 
 }
