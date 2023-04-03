@@ -6,6 +6,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 
+import java.io.IOException;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
@@ -15,6 +16,8 @@ public class ListenEventsConsumer {
 
     private static final String topic = "listen_events";
     private static final String consumerGroupID = "listen.consumer.v1";
+    private static final String datasetName = "raw";
+    private static final String tableName = "listen_events";
     private KafkaConsumer<String, ListenEvent> kafkaConsumer;
     private Properties kafkaProps;
 
@@ -25,19 +28,24 @@ public class ListenEventsConsumer {
         kafkaConsumer.subscribe(Collections.singleton(topic));
     }
 
-    public void consumeFromKafka() {
+    public void consumeFromKafka() throws IOException {
 
         Integer loopCounter = 0;
         while (true) {
 
-            System.out.println("Poll iteration: " + Integer.toString(++loopCounter));
+            System.out.println("\nPoll iteration: " + Integer.toString(++loopCounter));
             ConsumerRecords<String, ListenEvent> records = kafkaConsumer.poll(Duration.of(1, ChronoUnit.SECONDS));
 
 
             for(ConsumerRecord<String, ListenEvent> record: records) {
-                System.out.println("");
-                System.out.println(record.key());
-                System.out.println(record.value());
+                System.out.println(
+                        String.format("Sample: sessionId=\"%s\", userId=\"%s\", artist=\"%s\"",
+                                record.value().sessionId,
+                                record.value().userId,
+                                record.value().artist
+                        )
+                );
+                BigQueryWriter.insertRecord(datasetName, tableName, record.value().getRecordMap());
             }
             kafkaConsumer.commitSync();
             System.out.println("Commited sync...");
