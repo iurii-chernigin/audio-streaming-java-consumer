@@ -13,11 +13,7 @@ build/scripts
 build/tmp
 
 ### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/workspace.xml
-.idea/libraries/
+.idea
 *.iws
 *.iml
 *.ipr
