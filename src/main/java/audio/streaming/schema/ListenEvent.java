@@ -102,12 +102,14 @@ public class ListenEvent {
         record.put("ts", this.ts);
         record.put("sessionId", this.sessionId);
         record.put("auth", this.auth);
+        record.put("level", this.level);
         record.put("itemInSession", this.itemInSession);
         record.put("city", this.city);
         record.put("zip", this.zip);
         record.put("state", this.state);
         record.put("userAgent", this.userAgent);
         record.put("lon", this.lon);
+        record.put("lat", this.lat);
         record.put("userId", this.userId);
         record.put("lastName", this.lastName);
         record.put("firstName", this.firstName);
