@@ -35,11 +35,12 @@ public class ListenEventsConsumer {
 
             System.out.println("\nPoll iteration: " + Integer.toString(++loopCounter));
             ConsumerRecords<String, ListenEvent> records = kafkaConsumer.poll(Duration.of(1, ChronoUnit.SECONDS));
-
+            System.out.println(String.format("Read records (%s) from topic %s", records.count(), topic));
 
             for(ConsumerRecord<String, ListenEvent> record: records) {
+                System.out.println(String.format("\nOffset %s read", record.offset()));
                 System.out.println(
-                        String.format("Sample: sessionId=\"%s\", userId=\"%s\", artist=\"%s\"",
+                        String.format("Record values: sessionId=\"%s\", userId=\"%s\", artist=\"%s\" ...",
                                 record.value().sessionId,
                                 record.value().userId,
                                 record.value().artist
