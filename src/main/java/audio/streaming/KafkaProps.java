@@ -14,7 +14,7 @@ public class KafkaProps {
     private static final String bootstrapServer = "localhost:9092";
     private static final String schemaRegistryEndpoint = "http://localhost:8081";
     private static final String offsetResetConfig = "earliest";
-    private static final String autoCommitConfig = "false";
+    private static final String autoCommitConfig = "true";
 
     public static Properties getConsumerProps(String groupID) {
 
