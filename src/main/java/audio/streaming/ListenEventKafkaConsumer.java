@@ -1,5 +1,6 @@
 package audio.streaming;
 
+import audio.streaming.schema.Event;
 import audio.streaming.schema.ListenEvent;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -10,31 +11,29 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
-import java.util.Properties;
 
-public class ListenEventsConsumer {
+public class ListenKafkaEventConsumer extends KafkaEventConsumer {
 
-    private static final String topic = "listen_events";
-    private static final String consumerGroupID = "listen.consumer.v1";
-    private static final String datasetName = "raw";
-    private static final String tableName = "listen_events";
+
     private KafkaConsumer<String, ListenEvent> kafkaConsumer;
-    private Properties kafkaProps;
 
-    public ListenEventsConsumer () {
+    public ListenKafkaEventConsumer(String topic, String consumerGroupID) {
+        super(topic, consumerGroupID);
 
-        kafkaProps = KafkaProps.getConsumerProps(consumerGroupID);
-        kafkaConsumer = new KafkaConsumer<String, ListenEvent>(kafkaProps);
-        kafkaConsumer.subscribe(Collections.singleton(topic));
+        this.kafkaConsumer = new KafkaConsumer<String, ListenEvent>(super.kafkaProps);
+        this.kafkaConsumer.subscribe(Collections.singleton(super.topic));
+
     }
 
-    public void consumeFromKafka() throws IOException {
+
+    public void pollAndWriteToBigQuery(String datasetName, String tableName) throws IOException {
 
         Integer loopCounter = 0;
         while (true) {
 
-            System.out.println("\nPoll iteration: " + Integer.toString(++loopCounter));
             ConsumerRecords<String, ListenEvent> records = kafkaConsumer.poll(Duration.of(1, ChronoUnit.SECONDS));
+
+            System.out.println("Poll iteration: " + Integer.toString(++loopCounter));
             System.out.println(String.format("Read records (%s) from topic %s", records.count(), topic));
 
             for(ConsumerRecord<String, ListenEvent> record: records) {
@@ -48,6 +47,7 @@ public class ListenEventsConsumer {
                 );
                 BigQueryWriter.insertRecord(datasetName, tableName, record.value().getRecordMap());
             }
+            
             kafkaConsumer.commitSync();
             System.out.println("Commited sync...");
         }
