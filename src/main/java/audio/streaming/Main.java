@@ -1,11 +1,13 @@
 package audio.streaming;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         System.out.println("Enter point of Main!");
 
-        ListenEventsConsumer listenEventsComsumer = new ListenEventsConsumer();
-        listenEventsComsumer.consumeFromKafka();
+        ListenEventsConsumer listenEventsConsumer = new ListenEventsConsumer();
+        listenEventsConsumer.consumeFromKafka();
     }
 }
