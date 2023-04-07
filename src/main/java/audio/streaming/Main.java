@@ -7,7 +7,7 @@ public class Main {
 
         System.out.println("Enter point of Main!");
 
-        ListenEventsConsumer listenEventsConsumer = new ListenEventsConsumer();
-        listenEventsConsumer.consumeFromKafka();
+        PageViewEventKafkaConsumer pageViewKafkaConsumer = new PageViewEventKafkaConsumer("page_view_events", "page_view.consumer.v1");
+        pageViewKafkaConsumer.pollAndWriteToBigQuery("raw", "page_view_events");
     }
 }

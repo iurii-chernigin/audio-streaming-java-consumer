@@ -27,9 +27,9 @@ public class ListenEvent extends Event {
 
     }
 
-    public Map<String, Object> getRecordMap() {
+    public Map<String, Object> getEventMap() {
 
-        Map<String, Object> record = getRecordBasedMap();
+        Map<String, Object> record = super.getEventBaseMap();
 
         record.put("artist", this.artist);
         record.put("song", this.song);
