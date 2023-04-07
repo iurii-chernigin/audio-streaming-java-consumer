@@ -68,7 +68,7 @@ public class Event {
     }
 
 
-    public Map<String, Object> getRecordBasedMap() {
+    public Map<String, Object> getEventBaseMap() {
 
         Map<String, Object> record = new HashMap<>();
 

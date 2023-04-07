@@ -1,6 +1,6 @@
 package audio.streaming;
 
-import audio.streaming.schema.ListenEvent;
+import audio.streaming.schema.Event;
 import io.confluent.kafka.serializers.KafkaJsonDeserializerConfig;
 import io.confluent.kafka.serializers.KafkaJsonDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -16,7 +16,7 @@ public class KafkaProps {
     private static final String offsetResetConfig = "earliest";
     private static final String autoCommitConfig = "true";
 
-    public static Properties getConsumerProps(String groupID) {
+    public static Properties getConsumerProps(String groupID, String jsonDeserializerClass) {
 
         // Basic Configs
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
@@ -27,7 +27,7 @@ public class KafkaProps {
         // Deserialization Propeties
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaJsonDeserializer.class.getName());
-        props.put(KafkaJsonDeserializerConfig.JSON_VALUE_TYPE, ListenEvent.class.getName());
+        props.put(KafkaJsonDeserializerConfig.JSON_VALUE_TYPE, jsonDeserializerClass);
 
         return props;
     }
