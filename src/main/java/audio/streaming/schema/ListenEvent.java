@@ -1,8 +1,9 @@
 package audio.streaming.schema;
 
+import audio.streaming.PageViewEventKafkaConsumer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.Map;
 
 public class ListenEvent extends Event {
@@ -27,9 +28,10 @@ public class ListenEvent extends Event {
 
     }
 
+    @Override
     public Map<String, Object> getEventMap() {
 
-        Map<String, Object> record = super.getEventBaseMap();
+        Map<String, Object> record = super.getEventMap();
 
         record.put("artist", this.artist);
         record.put("song", this.song);
