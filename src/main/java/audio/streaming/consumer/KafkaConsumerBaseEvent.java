@@ -4,22 +4,23 @@ import audio.streaming.BigQueryWriter;
 import audio.streaming.schema.Event;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import java.io.IOException;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Properties;
 
-public abstract class KafkaConsumer {
+public abstract class KafkaConsumerBaseEvent {
 
     protected final String topic; // = "listen_events"
     protected final String consumerGroupID; // = "listen.consumer.v1"
     protected Properties kafkaProps;
     protected String jsonDeserializerClass;
-    protected org.apache.kafka.clients.consumer.KafkaConsumer<String, ? extends Event> kafkaConsumer;
+    protected KafkaConsumer<String, ? extends Event> kafkaConsumer;
 
 
-    public KafkaConsumer(String topic, String consumerGroupID, String jsonDeserializerClass) {
+    public KafkaConsumerBaseEvent(String topic, String consumerGroupID, String jsonDeserializerClass) {
 
         this.topic = topic;
         this.consumerGroupID = consumerGroupID;

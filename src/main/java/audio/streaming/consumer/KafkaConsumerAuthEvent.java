@@ -6,7 +6,7 @@ import audio.streaming.schema.PageViewEvent;
 import java.io.IOException;
 import java.util.Collections;
 
-public class KafkaConsumerAuthEvent extends KafkaConsumer {
+public class KafkaConsumerAuthEvent extends KafkaConsumerBaseEvent {
 
     private org.apache.kafka.clients.consumer.KafkaConsumer<String, PageViewEvent> kafkaConsumer;
 

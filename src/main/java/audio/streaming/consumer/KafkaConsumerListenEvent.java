@@ -1,12 +1,11 @@
 package audio.streaming.consumer;
 
 import audio.streaming.schema.ListenEvent;
-import audio.streaming.schema.PageViewEvent;
 
 import java.io.IOException;
 import java.util.Collections;
 
-public class KafkaConsumerListenEvent extends KafkaConsumer {
+public class KafkaConsumerListenEvent extends KafkaConsumerBaseEvent {
 
     public KafkaConsumerListenEvent(String topic, String consumerGroupID) {
 
