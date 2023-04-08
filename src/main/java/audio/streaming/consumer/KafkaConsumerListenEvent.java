@@ -1,16 +1,17 @@
 package audio.streaming.consumer;
 
 import audio.streaming.schema.ListenEvent;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import java.io.IOException;
 import java.util.Collections;
 
-public class KafkaConsumerListenEvent extends KafkaConsumerBaseEvent {
+public class KafkaConsumerListenEvent extends KafkaConsumerBase {
 
     public KafkaConsumerListenEvent(String topic, String consumerGroupID) {
 
         super(topic, consumerGroupID, ListenEvent.class.getName());
-        super.kafkaConsumer = new org.apache.kafka.clients.consumer.KafkaConsumer<String, ListenEvent>(super.kafkaProps);
+        super.kafkaConsumer = new KafkaConsumer<String, ListenEvent>(super.kafkaProps);
         super.kafkaConsumer.subscribe(Collections.singleton(super.topic));
 
     }

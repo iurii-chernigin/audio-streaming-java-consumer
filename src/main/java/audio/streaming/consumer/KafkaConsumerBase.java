@@ -44,10 +44,11 @@ public abstract class KafkaConsumerBase {
             for (ConsumerRecord<String, ? extends Event> record : records) {
                 System.out.println(String.format("\nOffset %s read", record.offset()));
                 System.out.println(
-                        String.format("Record values: sessionId=\"%s\", userId=\"%s\" ...",
+                        String.format("Record values: sessionId=\"%s\", userId=\"%s\", timestamp=\"%s\", registration=\"%s\" ...",
                                 record.value().sessionId,
                                 record.value().userId,
-                                record.value().ts
+                                record.value().ts,
+                                record.value().registration
                         )
                 );
                 BigQueryWriter.insertRecord(datasetName, tableName, record.value().getEventMap());
