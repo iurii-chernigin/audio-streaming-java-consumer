@@ -67,6 +67,28 @@ public class Event {
 
     }
 
+    // Constructor to support the optionality of the auth field
+    public Event(long ts, long sessionId, String level, int itemInSession, String city, int zip, String state, String userAgent, float lon, float lat, int userId, String lastName, String firstName, String gender, long registration, String tag) {
+
+        this.ts = ts; // Unix time in milliseconds
+        this.sessionId = sessionId;
+        this.level = level;
+        this.itemInSession = itemInSession;
+        this.city = city;
+        this.zip = zip;
+        this.state = state;
+        this.userAgent = userAgent;
+        this.lon = lon;
+        this.lat = lat;
+        this.userId = userId;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.gender = gender;
+        this.registration = registration; // Unix time in milliseconds
+        this.tag = tag; // Custom tag (enters in cli)
+
+    }
+
 
     public Map<String, Object> getEventBaseMap() {
 
@@ -74,7 +96,6 @@ public class Event {
 
         record.put("userId", this.userId);
         record.put("sessionId", this.sessionId);
-        record.put("auth", this.auth);
         record.put("ts", this.ts);
         record.put("registration", this.registration);
         record.put("level", this.level);
@@ -89,6 +110,10 @@ public class Event {
         record.put("firstName", this.firstName);
         record.put("gender", this.gender);
         record.put("tag", this.tag);
+
+        if (this.auth != null) {
+            record.put("auth", this.auth);
+        }
 
         return record;
     }
