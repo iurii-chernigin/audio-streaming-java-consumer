@@ -1,6 +1,5 @@
-package audio.streaming;
+package audio.streaming.consumer;
 
-import audio.streaming.schema.Event;
 import io.confluent.kafka.serializers.KafkaJsonDeserializerConfig;
 import io.confluent.kafka.serializers.KafkaJsonDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
