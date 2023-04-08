@@ -11,7 +11,7 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Properties;
 
-public abstract class KafkaConsumerBaseEvent {
+public abstract class KafkaConsumerBase {
 
     protected final String topic; // = "listen_events"
     protected final String consumerGroupID; // = "listen.consumer.v1"
@@ -20,7 +20,7 @@ public abstract class KafkaConsumerBaseEvent {
     protected KafkaConsumer<String, ? extends Event> kafkaConsumer;
 
 
-    public KafkaConsumerBaseEvent(String topic, String consumerGroupID, String jsonDeserializerClass) {
+    public KafkaConsumerBase(String topic, String consumerGroupID, String jsonDeserializerClass) {
 
         this.topic = topic;
         this.consumerGroupID = consumerGroupID;
@@ -44,9 +44,11 @@ public abstract class KafkaConsumerBaseEvent {
             for (ConsumerRecord<String, ? extends Event> record : records) {
                 System.out.println(String.format("\nOffset %s read", record.offset()));
                 System.out.println(
-                        String.format("Record values: sessionId=\"%s\", userId=\"%s\" ...",
+                        String.format("Record values: sessionId=\"%s\", userId=\"%s\", timestamp=\"%s\", registration=\"%s\" ...",
                                 record.value().sessionId,
-                                record.value().userId
+                                record.value().userId,
+                                record.value().ts,
+                                record.value().registration
                         )
                 );
                 BigQueryWriter.insertRecord(datasetName, tableName, record.value().getEventMap());

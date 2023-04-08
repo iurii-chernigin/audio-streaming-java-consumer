@@ -5,7 +5,7 @@ import audio.streaming.schema.PageViewEvent;
 import java.io.IOException;
 import java.util.Collections;
 
-public class KafkaConsumerPageViewEvent extends KafkaConsumerBaseEvent {
+public class KafkaConsumerPageViewEvent extends KafkaConsumerBase {
 
     public KafkaConsumerPageViewEvent(String topic, String consumerGroupID) {
         super(topic, consumerGroupID, PageViewEvent.class.getName());
