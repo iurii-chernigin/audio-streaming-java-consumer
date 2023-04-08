@@ -2,8 +2,13 @@ package audio.streaming.schema;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 
 public class Event {
 
@@ -12,9 +17,9 @@ public class Event {
     @JsonProperty
     public long sessionId;
     @JsonProperty
-    public long registration;
+    public Timestamp registration;
     @JsonProperty
-    public long ts;
+    public Timestamp ts;
     @JsonProperty
     public String auth;
     @JsonProperty
@@ -47,7 +52,7 @@ public class Event {
 
     public Event(long ts, long sessionId, String auth, String level, int itemInSession, String city, int zip, String state, String userAgent, float lon, float lat, int userId, String lastName, String firstName, String gender, long registration, String tag) {
 
-        this.ts = ts; // Unix time in milliseconds
+        this.ts = new Timestamp(ts);
         this.sessionId = sessionId;
         this.auth = auth;
         this.level = level;
@@ -62,7 +67,7 @@ public class Event {
         this.lastName = lastName;
         this.firstName = firstName;
         this.gender = gender;
-        this.registration = registration; // Unix time in milliseconds
+        this.registration = new Timestamp(registration);
         this.tag = tag; // Custom tag (enters in cli)
 
     }
@@ -70,7 +75,7 @@ public class Event {
     // Constructor to support the optionality of the auth field
     public Event(long ts, long sessionId, String level, int itemInSession, String city, int zip, String state, String userAgent, float lon, float lat, int userId, String lastName, String firstName, String gender, long registration, String tag) {
 
-        this.ts = ts; // Unix time in milliseconds
+        this.ts = new Timestamp(ts); // Unix time in milliseconds
         this.sessionId = sessionId;
         this.level = level;
         this.itemInSession = itemInSession;
@@ -84,7 +89,7 @@ public class Event {
         this.lastName = lastName;
         this.firstName = firstName;
         this.gender = gender;
-        this.registration = registration; // Unix time in milliseconds
+        this.registration = new Timestamp(registration); // Unix time in milliseconds
         this.tag = tag; // Custom tag (enters in cli)
 
     }
@@ -94,10 +99,18 @@ public class Event {
 
         Map<String, Object> record = new HashMap<>();
 
+        if (this.ts != null) {
+            record.put("ts", this.ts.toString());
+        }
+        if (this.registration != null) {
+            record.put("registration", this.registration.toString());
+        }
+        if (this.auth != null) {
+            record.put("auth", this.auth);
+        }
+
         record.put("userId", this.userId);
         record.put("sessionId", this.sessionId);
-        record.put("ts", this.ts);
-        record.put("registration", this.registration);
         record.put("level", this.level);
         record.put("itemInSession", this.itemInSession);
         record.put("city", this.city);
@@ -110,10 +123,6 @@ public class Event {
         record.put("firstName", this.firstName);
         record.put("gender", this.gender);
         record.put("tag", this.tag);
-
-        if (this.auth != null) {
-            record.put("auth", this.auth);
-        }
 
         return record;
     }
