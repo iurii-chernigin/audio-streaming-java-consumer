@@ -1,9 +1,7 @@
 package audio.streaming.schema;
 
-import audio.streaming.PageViewEventKafkaConsumer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.io.IOException;
 import java.util.Map;
 
 public class AuthEvent extends Event {
