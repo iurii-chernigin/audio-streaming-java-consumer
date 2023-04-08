@@ -90,7 +90,7 @@ public class Event {
     }
 
 
-    public Map<String, Object> getEventBaseMap() {
+    protected Map<String, Object> getEventMap() {
 
         Map<String, Object> record = new HashMap<>();
 
