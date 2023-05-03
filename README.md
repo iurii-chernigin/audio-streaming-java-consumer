@@ -1,12 +1,13 @@
 # Java Consumer for Audio Streaming Data Platfrom
 
-Link to the root repository: https://github.com/iurii-chernigin/audio-streaming-data-platform
+This application is an essential component of the data platform for an audio streaming service. Before running it, be sure to check out the architecture by following this link: https://github.com/iurii-chernigin/audio-streaming-data-platform
 
 ### Prerequisites
 
-#### 1. Setting up your project in Google Cloud
-[Quickstart: Using client libraries](https://cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries)
-
+1. Setting up your project in Google Cloud 
+2. Set up a connection to Kafka: [KafkaProps.kava](https://github.com/iurii-chernigin/audio-streaming-java-consumer/blob/main/src/main/java/audio/streaming/consumer/KafkaProps.java)
+3. [Enable BigQuery API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery&_ga=2.241857153.2099755602.1683145202-1316396118.1673887289&_gac=1.50205780.1683056672.Cj0KCQjw6cKiBhD5ARIsAKXUdyayoB5QK9gojokZQPZLWF1WxTuF8ygbpLrQAG7Qq5bN2X1IzsZbD2QaAtDwEALw_wcB)
+4. Create tables in BigQuery according to the schemas: [audio-streaming-data-platform/data-warehouse/bigquery/schema](https://github.com/iurii-chernigin/audio-streaming-data-platform/tree/main/data-warehouse/bigquery/schema)
 
 ###  Plans To-Do
 
