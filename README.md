@@ -13,3 +13,4 @@ Link to the root repository: https://github.com/iurii-chernigin/audio-streaming-
 - Implement support for the Avro date format
 - Implement support for the Kafka Schema Registry
 - Change the data writing mechanism in BigQuery: add support of microbatch writing
+- Create package to run application in Docker
